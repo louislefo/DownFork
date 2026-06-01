@@ -157,7 +157,7 @@ export default function Sidebar() {
         </div>
         <div>
           <h1 className="text-sm font-semibold text-text-primary tracking-tight">DownFork</h1>
-          <p className="text-[10px] text-text-muted font-medium">v0.0.4</p>
+          <p className="text-[10px] text-text-muted font-medium">v0.0.5</p>
         </div>
       </Link>
 
