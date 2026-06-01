@@ -41,20 +41,16 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Create non-root user for security
-RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nextjs
+# Use default node user from the image
+RUN mkdir -p /app/data /app/public/downloads && \
+    chown -R node:node /app
 
-# Copy standalone build output
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/public ./public
+# Copy standalone build output with proper ownership
+COPY --from=builder --chown=node:node /app/.next/standalone ./
+COPY --from=builder --chown=node:node /app/.next/static ./.next/static
+COPY --from=builder --chown=node:node /app/public ./public
 
-# Create writable directories for runtime data
-RUN mkdir -p data public/downloads && \
-    chown -R nextjs:nodejs data public/downloads .next
-
-USER nextjs
+USER node
 
 EXPOSE 3000
 
