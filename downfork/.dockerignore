@@ -1,0 +1,10 @@
+node_modules
+.next
+.git
+.gitignore
+*.md
+.env*
+data/dev.db
+data/dev.db-journal
+public/downloads/*
+yt-dlp.exe

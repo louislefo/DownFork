@@ -1,0 +1,427 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>OmniFetch - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002113",
+                        "on-secondary-container": "#00311f",
+                        "on-surface": "#e4e1e6",
+                        "background": "#131316",
+                        "surface-tint": "#c3c0ff",
+                        "on-tertiary-container": "#ffd0d2",
+                        "secondary": "#4edea3",
+                        "on-tertiary-fixed-variant": "#92002a",
+                        "on-primary-container": "#dad7ff",
+                        "on-tertiary": "#67001b",
+                        "primary-fixed": "#e2dfff",
+                        "inverse-surface": "#e4e1e6",
+                        "surface-container": "#1f1f22",
+                        "tertiary-fixed-dim": "#ffb2b7",
+                        "on-surface-variant": "#c7c4d8",
+                        "surface-dim": "#131316",
+                        "surface-container-lowest": "#0e0e11",
+                        "on-secondary": "#003824",
+                        "secondary-fixed-dim": "#4edea3",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#bf0f3c",
+                        "on-tertiary-fixed": "#40000d",
+                        "secondary-container": "#00a572",
+                        "tertiary-fixed": "#ffdadb",
+                        "outline-variant": "#464555",
+                        "primary": "#c3c0ff",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-container-high": "#2a2a2d",
+                        "surface-bright": "#39393c",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "inverse-on-surface": "#303033",
+                        "outline": "#918fa1",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface": "#131316",
+                        "primary-container": "#4f46e5",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-background": "#e4e1e6",
+                        "surface-container-highest": "#353438",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-variant": "#353438",
+                        "on-primary": "#1d00a5",
+                        "inverse-primary": "#4d44e3",
+                        "surface-container-low": "#1b1b1e",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "tertiary": "#ffb2b7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "2xl": "48px",
+                        "margin": "24px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "3xl": "64px",
+                        "unit": "4px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "label-md": ["Geist"],
+                        "display": ["Geist"],
+                        "code": ["jetbrainsMono"],
+                        "body-md": ["Geist"],
+                        "body-sm": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "headline-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "code": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar -->
+<nav class="hidden lg:flex flex-col border-r border-outline-variant w-64 h-screen p-md gap-sm bg-surface-container-low dark:bg-surface-container-low shrink-0 z-10">
+<div class="flex items-center gap-sm mb-lg px-sm">
+<div class="w-8 h-8 rounded bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-label-md">OF</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface dark:text-on-surface tracking-tighter">OmniFetch</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">v2.4.1 - Active</p>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container rounded flex items-center justify-center gap-sm py-sm px-md hover:bg-inverse-primary transition-colors text-label-md font-label-md mb-md shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+            Add New Link
+        </button>
+<div class="flex-1 flex flex-col gap-unit">
+<a class="bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container rounded-lg flex items-center gap-sm py-sm px-md text-label-md font-label-md scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined">download_for_offline</span>
+                Downloads
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all rounded-lg flex items-center gap-sm py-sm px-md text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">history</span>
+                History
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all rounded-lg flex items-center gap-sm py-sm px-md text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">folder_special</span>
+                Library
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all rounded-lg flex items-center gap-sm py-sm px-md text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">event_repeat</span>
+                Scheduler
+            </a><div class="mt-md mb-xs px-md">
+    <span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/50">Tools</span>
+</div>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all rounded-lg flex items-center gap-sm py-sm px-md text-label-md font-label-md" href="#">
+    <span class="material-symbols-outlined">transform</span>
+    Media Converter
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all rounded-lg flex items-center gap-sm py-sm px-md text-label-md font-label-md" href="#">
+    <span class="material-symbols-outlined">account_tree</span>
+    URL Batcher
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all rounded-lg flex items-center gap-sm py-sm px-md text-label-md font-label-md" href="#">
+    <span class="material-symbols-outlined">database</span>
+    Storage Manager
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-unit border-t border-outline-variant pt-md">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all rounded-lg flex items-center gap-sm py-sm px-md text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all rounded-lg flex items-center gap-sm py-sm px-md text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">terminal</span>
+                Terminal
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 overflow-y-auto bg-background">
+<!-- Top Header (Dashboard Specific) -->
+<header class="flex justify-between items-center w-full px-gutter h-16 sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<!-- Mobile Menu Trigger (hidden on lg) -->
+<button class="lg:hidden text-on-surface-variant hover:text-on-surface transition-colors p-sm rounded hover:bg-surface-container">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex items-center gap-sm">
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tighter">OmniFetch</h2>
+<div class="flex items-center gap-xs px-sm py-xs rounded-full bg-secondary-container/10 border border-secondary/20">
+<div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+<span class="text-label-sm font-label-sm text-secondary">Server Active</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden sm:flex items-center gap-sm text-label-sm font-label-sm text-on-surface-variant bg-surface-container px-sm py-xs rounded border border-outline-variant">
+<span class="material-symbols-outlined text-[16px]">hard_drive</span>
+                    Disk Space: 142 GB free / 500 GB
+                </div>
+<div class="flex items-center gap-sm">
+<button class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors p-sm rounded">
+<span class="material-symbols-outlined">online_prediction</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors p-sm rounded">
+<span class="material-symbols-outlined">storage</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-gutter max-w-[1200px] w-full mx-auto space-y-2xl pb-3xl">
+<!-- Capture Zone -->
+<section class="space-y-md">
+<div class="flex items-end justify-between mb-sm">
+<h3 class="text-headline-lg font-headline-lg text-on-surface">Capture</h3>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-lg shadow-sm relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/5 to-transparent pointer-events-none opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<div class="relative z-10 flex flex-col gap-lg">
+<!-- Input Field -->
+<div class="flex flex-col sm:flex-row gap-sm">
+<div class="relative flex-1 group/input">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within/input:text-primary transition-colors">link</span>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg pl-[40px] pr-sm py-sm text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 placeholder-on-surface-variant/50 transition-all h-12" placeholder="Paste media URL here..." type="text">
+</div>
+<button class="bg-surface-container border border-outline-variant text-on-surface hover:bg-surface-container-high px-lg py-sm rounded-lg text-label-md font-label-md flex items-center justify-center gap-sm transition-colors h-12 shrink-0">
+<span class="material-symbols-outlined text-[18px]">content_paste</span>
+                                Paste
+                            </button>
+</div>
+<!-- Format Selector -->
+<div class="space-y-sm">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Select Format</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-sm">
+<label class="cursor-pointer">
+<input class="peer sr-only" name="format" type="radio" value="audio">
+<div class="bg-surface border border-outline-variant rounded-lg p-sm flex items-center gap-sm peer-checked:border-primary peer-checked:bg-primary-container/10 peer-checked:text-primary transition-all hover:bg-surface-container">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center shrink-0 peer-checked:bg-primary-container/20">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant peer-checked:text-primary">audio_file</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-md font-label-md text-on-surface peer-checked:text-primary">Audio</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">MP3 High Quality</span>
+</div>
+</div>
+</label>
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="format" type="radio" value="video_720">
+<div class="bg-surface border border-outline-variant rounded-lg p-sm flex items-center gap-sm peer-checked:border-primary peer-checked:bg-primary-container/10 peer-checked:text-primary transition-all hover:bg-surface-container">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center shrink-0 peer-checked:bg-primary-container/20">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant peer-checked:text-primary">videocam</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-md font-label-md text-on-surface peer-checked:text-primary">Standard Video</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">MP4 720p</span>
+</div>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="format" type="radio" value="video_1080">
+<div class="bg-surface border border-outline-variant rounded-lg p-sm flex items-center gap-sm peer-checked:border-primary peer-checked:bg-primary-container/10 peer-checked:text-primary transition-all hover:bg-surface-container">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center shrink-0 peer-checked:bg-primary-container/20">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant peer-checked:text-primary">high_quality</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-md font-label-md text-on-surface peer-checked:text-primary">High Definition</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">MP4 1080p+</span>
+</div>
+</div>
+</label>
+</div>
+</div>
+<!-- Primary Action & Progress -->
+<div class="flex flex-col gap-md pt-sm border-t border-outline-variant/50">
+<button class="w-full sm:w-auto self-end bg-primary-container text-on-primary-container px-xl py-sm rounded-lg text-label-md font-label-md font-bold flex items-center justify-center gap-sm hover:bg-inverse-primary transition-colors shadow-sm h-12">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">download</span>
+                                Start Download
+                            </button>
+<!-- Mock Progress Indicator -->
+<div class="bg-surface border border-outline-variant rounded-lg p-md flex flex-col gap-sm">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-sm">
+<span class="text-label-sm font-label-sm px-2 py-0.5 rounded bg-primary-container/20 text-primary border border-primary/20">Downloading</span>
+<span class="text-body-sm font-body-sm text-on-surface truncate max-w-[200px] sm:max-w-[400px]">Data_Structures_Lecture_14_HD.mp4</span>
+</div>
+<span class="text-label-sm font-label-sm text-primary font-code">4.2 MB/s</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 overflow-hidden relative">
+<div class="bg-primary h-full rounded-full w-[75%] relative">
+<div class="absolute top-0 right-0 bottom-0 left-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.15)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.15)_50%,rgba(255,255,255,0.15)_75%,transparent_75%,transparent)] bg-[length:1rem_1rem] animate-[progress_1s_linear_infinite]"></div>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant">340 MB / 450 MB</span>
+<span class="text-label-md font-label-md text-on-surface font-bold">75%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- History Panel -->
+<section class="space-y-md">
+<div class="flex justify-between items-end mb-sm">
+<h3 class="text-headline-md font-headline-md text-on-surface">Recent Downloads</h3>
+<button class="text-label-sm font-label-sm text-primary hover:text-inverse-primary transition-colors flex items-center gap-xs">
+                        View All <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container">
+<th class="py-sm px-md text-label-sm font-label-sm text-on-surface-variant font-medium w-2/5">Title</th>
+<th class="py-sm px-md text-label-sm font-label-sm text-on-surface-variant font-medium w-1/6">Format</th>
+<th class="py-sm px-md text-label-sm font-label-sm text-on-surface-variant font-medium w-1/6">Size</th>
+<th class="py-sm px-md text-label-sm font-label-sm text-on-surface-variant font-medium w-1/6">Date</th>
+<th class="py-sm px-md text-label-sm font-label-sm text-on-surface-variant font-medium w-1/6">Status</th>
+<th class="py-sm px-md text-label-sm font-label-sm text-on-surface-variant font-medium w-[100px] text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">description</span>
+<span class="text-body-sm font-body-sm text-on-surface truncate max-w-[250px]">Lofi_Hip_Hop_Radio_Beats_to_Relax.mp3</span>
+</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-label-sm font-bold bg-[#1e3a8a]/20 text-[#60a5fa] border border-[#1e3a8a]/50">MP3</span>
+</td>
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface-variant font-code">45.2 MB</td>
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface-variant">2 hours ago</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-xs text-secondary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="text-label-sm font-label-sm">Completed</span>
+</div>
+</td>
+<td class="py-md px-md text-right">
+<div class="flex items-center justify-end gap-xs opacity-50 group-hover:opacity-100 transition-opacity">
+<button class="p-xs text-on-surface-variant hover:text-primary rounded hover:bg-surface transition-colors" title="Play">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-primary rounded hover:bg-surface transition-colors" title="Download">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-error rounded hover:bg-error-container/20 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">description</span>
+<span class="text-body-sm font-body-sm text-on-surface truncate max-w-[250px]">Cinematic_Drone_Footage_Iceland_4K.mp4</span>
+</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-label-sm font-bold bg-[#581c87]/20 text-[#c084fc] border border-[#581c87]/50">1080p</span>
+</td>
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface-variant font-code">1.2 GB</td>
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface-variant">Yesterday</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-xs text-secondary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="text-label-sm font-label-sm">Completed</span>
+</div>
+</td>
+<td class="py-md px-md text-right">
+<div class="flex items-center justify-end gap-xs opacity-50 group-hover:opacity-100 transition-opacity">
+<button class="p-xs text-on-surface-variant hover:text-primary rounded hover:bg-surface transition-colors" title="Play">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-primary rounded hover:bg-surface transition-colors" title="Download">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-error rounded hover:bg-error-container/20 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">description</span>
+<span class="text-body-sm font-body-sm text-on-surface truncate max-w-[250px]">Tutorial_React_Hooks_Advanced.mp4</span>
+</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-label-sm font-bold bg-surface-bright text-on-surface-variant border border-outline-variant">720p</span>
+</td>
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface-variant font-code">210 MB</td>
+<td class="py-md px-md text-body-sm font-body-sm text-on-surface-variant">3 days ago</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-xs text-error">
+<span class="material-symbols-outlined text-[16px]">error</span>
+<span class="text-label-sm font-label-sm">Failed</span>
+</div>
+</td>
+<td class="py-md px-md text-right">
+<div class="flex items-center justify-end gap-xs opacity-50 group-hover:opacity-100 transition-opacity">
+<button class="p-xs text-on-surface-variant hover:text-primary rounded hover:bg-surface transition-colors" title="Retry">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-error rounded hover:bg-error-container/20 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+</main>
+<style>
+        @keyframes progress {
+            0% { background-position: 0 0; }
+            100% { background-position: 1rem 0; }
+        }
+    </style>
+
+
+</body></html>
