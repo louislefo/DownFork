@@ -71,12 +71,11 @@ async function ensureTable() {
   `);
   isInitialized = true;
   if (typeof window === 'undefined') {
-    try {
-      const { startSchedulerWorker } = require('./scheduler-worker');
-      startSchedulerWorker();
-    } catch (err) {
-      console.error('Failed to import or start scheduler worker:', err);
-    }
+    import('./scheduler-worker').then(mod => {
+      mod.startSchedulerWorker();
+    }).catch(err => {
+      console.error('Failed to start scheduler worker:', err);
+    });
   }
 }
 

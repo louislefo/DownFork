@@ -27,9 +27,9 @@ const activeProcesses = new Map<string, ChildProcess>();
 function getBinaryPath(): string {
   const localPath = path.join(process.cwd(), 'yt-dlp.exe');
   if (fs.existsSync(localPath)) {
-    return `"${localPath}"`;
+    return `"${localPath}" --js-runtimes nodejs`;
   }
-  return 'yt-dlp';
+  return 'yt-dlp --js-runtimes nodejs';
 }
 
 /**
